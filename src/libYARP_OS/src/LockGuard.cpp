@@ -8,23 +8,23 @@
  */
 
 #include <yarp/os/LockGuard.h>
-#include <yarp/os/Mutex.h>
+#include <yarp/os/Lockable.h>
 
 namespace yarp {
     namespace os {
-        LockGuard::LockGuard(yarp::os::Mutex& _mutex)
-            : mutex(_mutex)
+        LockGuard::LockGuard(yarp::os::Lockable& _lock)
+            : lock(_lock)
         {
-            mutex.lock();
+            lock.lock();
         }
         
         LockGuard::~LockGuard()
         {
-            mutex.unlock();
+            lock.unlock();
         }
         
         LockGuard::LockGuard(const LockGuard& lg)
-        : mutex(lg.mutex) { }
+        : lock(lg.lock) { }
         
         LockGuard& LockGuard::operator=(const LockGuard&) { return *this; }
     }

@@ -14,7 +14,7 @@
 
 namespace yarp {
     namespace os {
-        class Mutex;
+        class Lockable;
         class LockGuard;
     }
 }
@@ -34,7 +34,7 @@ public:
      * The behavior is undefined if _mutex is destroyed before the LockGuard object is.
      * @param _mutex the mutex which will be locked
      */
-    explicit LockGuard(yarp::os::Mutex& _mutex);
+    explicit LockGuard(yarp::os::Lockable& _lock);
     
     /**
      * destructs the LockGuard object, unlocks the underlying mutex
@@ -49,7 +49,7 @@ private:
     /** Assignment operator is disabled */
     LockGuard& operator=(const LockGuard&);
     
-    yarp::os::Mutex& mutex; /*!< underlining mutex */
+    yarp::os::Lockable& lock; /*!< underlining mutex */
 };
 
 #endif

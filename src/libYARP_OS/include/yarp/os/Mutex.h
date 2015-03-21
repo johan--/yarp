@@ -11,6 +11,7 @@
 #define _YARP2_MUTEX_
 
 #include <yarp/os/api.h>
+#include <yarp/os/Lockable.h>
 
 namespace yarp {
     namespace os {
@@ -25,7 +26,7 @@ namespace yarp {
  * C++11, for eventual replacement by that class.
  *
  */
-class YARP_OS_API yarp::os::Mutex {
+class YARP_OS_API yarp::os::Mutex : public yarp::os::Lockable {
 public:
 
     /**
@@ -40,7 +41,7 @@ public:
      * Destructor.
      *
      */
-    ~Mutex();
+    virtual ~Mutex();
 
     /**
      *
@@ -49,7 +50,7 @@ public:
      * the resource.
      *
      */
-    void lock();
+    virtual void lock();
 
     /**
      *
@@ -60,7 +61,7 @@ public:
      * @return true if the associated resource was successfully locked.
      *
      */
-    bool tryLock();
+    virtual bool tryLock();
 
     /**
      *
@@ -69,7 +70,7 @@ public:
      * the behavior is undefined.
      *
      */
-    void unlock();
+    virtual void unlock();
 private:
     void *implementation;
 };
