@@ -51,7 +51,6 @@
 #include <yarp/os/Subscriber.h>
 #include <yarp/os/Mutex.h>
 #include <yarp/os/RecursiveMutex.h>
-#include <yarp/os/Lockable.h>
 #include <yarp/os/LockGuard.h>
 #include <yarp/os/Event.h>
 #include <yarp/os/Thread.h>

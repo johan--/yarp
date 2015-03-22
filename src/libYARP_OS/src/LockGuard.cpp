@@ -8,24 +8,35 @@
  */
 
 #include <yarp/os/LockGuard.h>
-#include <yarp/os/Lockable.h>
 
 namespace yarp {
     namespace os {
-        LockGuard::LockGuard(yarp::os::Lockable& _lock)
+        template <typename Lockable>
+        AbstractLockGuard<Lockable>::AbstractLockGuard(Lockable& _lock)
             : lock(_lock)
         {
             lock.lock();
         }
-        
-        LockGuard::~LockGuard()
+
+        template <typename Lockable>
+        AbstractLockGuard<Lockable>::~AbstractLockGuard()
         {
             lock.unlock();
         }
-        
-        LockGuard::LockGuard(const LockGuard& lg)
+
+        template <typename Lockable>
+        AbstractLockGuard<Lockable>::AbstractLockGuard(const AbstractLockGuard& lg)
         : lock(lg.lock) { }
-        
-        LockGuard& LockGuard::operator=(const LockGuard&) { return *this; }
+
+        template <typename Lockable>
+        AbstractLockGuard<Lockable>& AbstractLockGuard<Lockable>::operator=(const AbstractLockGuard&) { return *this; }
     }
 }
+
+//actual (and visible) implementations
+#include <yarp/os/Mutex.h>
+#include <yarp/os/RecursiveMutex.h>
+
+template class yarp::os::AbstractLockGuard<yarp::os::Mutex>;
+template class yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
+

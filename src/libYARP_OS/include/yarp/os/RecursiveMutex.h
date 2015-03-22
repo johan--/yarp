@@ -10,7 +10,7 @@
 #ifndef YARP_RECURSIVELOCK_H
 #define YARP_RECURSIVELOCK_H
 
-#include <yarp/os/Lockable.h>
+#include <yarp/os/api.h>
     
 namespace yarp {
     namespace os {
@@ -27,7 +27,7 @@ namespace yarp {
  * currently owning the RecursiveMutex
  *
  */
-class YARP_OS_API yarp::os::RecursiveMutex : public yarp::os::Lockable {
+class YARP_OS_API yarp::os::RecursiveMutex {
 public:
 
     /**
@@ -42,7 +42,7 @@ public:
      * Destructor.
      *
      */
-    virtual ~RecursiveMutex();
+    ~RecursiveMutex();
 
     /**
      * @brief Lock the associated resource, waiting if the resource is busy.
@@ -53,7 +53,7 @@ public:
      * calls to unlock()
      *
      */
-    virtual void lock();
+    void lock();
 
     /**
      * @brief Lock the associated resource if it is free.
@@ -62,7 +62,7 @@ public:
      * @return true if the associated resource was successfully locked. False otherwise
      *
      */
-    virtual bool tryLock();
+    bool tryLock();
 
     /**
      * @brief Unlock the associated resource thus freeing waiting threads.
@@ -71,7 +71,7 @@ public:
      * the behavior is undefined.
      *
      */
-    virtual void unlock();
+    void unlock();
     
 private:
     void *implementation;
