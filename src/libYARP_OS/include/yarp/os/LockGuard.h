@@ -34,7 +34,7 @@ namespace yarp {
  * The lock_guard class is non-copyable. 
  */
 template <typename Lockable>
-class YARP_OS_API yarp::os::AbstractLockGuard {
+class yarp::os::AbstractLockGuard {
 public:
     /**
      * Acquires ownership of the given mutex _mutex.
@@ -58,5 +58,8 @@ private:
     
     Lockable& lock; /*!< underlining mutex */
 };
+
+extern template class yarp::os::AbstractLockGuard<yarp::os::Mutex>;
+extern template class yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
 
 #endif

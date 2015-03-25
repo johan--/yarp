@@ -37,6 +37,6 @@ namespace yarp {
 #include <yarp/os/Mutex.h>
 #include <yarp/os/RecursiveMutex.h>
 
-template class yarp::os::AbstractLockGuard<yarp::os::Mutex>;
-template class yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
+template class YARP_OS_API yarp::os::AbstractLockGuard<yarp::os::Mutex>;
+template class YARP_OS_API yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
 
