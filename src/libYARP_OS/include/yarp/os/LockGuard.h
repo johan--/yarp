@@ -59,13 +59,17 @@ private:
     Lockable& lock; /*!< underlining mutex */
 };
 
+#ifndef YARP_LG_EXTERN
 #if defined _WIN32 || defined __CYGWIN__
-#define YARP_EXTERN
+#define YARP_LG_EXTERN
 #else
-#define YARP_EXTERN extern
+#define YARP_LG_EXTERN extern
+#endif
 #endif
 
-YARP_EXTERN template class yarp::os::AbstractLockGuard<yarp::os::Mutex>;
-YARP_EXTERN template class yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
+YARP_LG_EXTERN template class yarp::os::AbstractLockGuard<yarp::os::Mutex>;
+YARP_LG_EXTERN template class yarp::os::AbstractLockGuard<yarp::os::RecursiveMutex>;
+
+#undef YARP_LG_EXTERN
 
 #endif
